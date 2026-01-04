@@ -7,3 +7,9 @@ To begin, enter the App ID of the game you're interested in manipulating the fil
 Note files that reside directly on the filesystem (e.g. game saves) do not appear in the list. To modify those files and sync them back to Steam Cloud, launch the game, modify (or delete) the files you want, and close the game. Your modified files will be synced back, and those deleted will also be deleted on Steam Cloud.
 
 You may find [Steam DB](https://steamdb.info/) to be useful in finding App IDs. The User Cloud tab on Steam DB's app pages is also helpful for finding where synced save files are.
+
+Besides the program, you will also need these websites:
+
+[https://store.steampowered.com/account/remotestorage] Help you understand the current status of your Steam Cloud file
+[https://steamdb.info/] Obtain the App ID of the game and, very importantly, understand which way it uses to save Steam Cloud
+[https://gaming.stackexchange.com/questions/102694/is-there-a-quick-way-to-delete-saves-off-of-the-steam-cloud] For other solutions
