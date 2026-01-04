@@ -7,7 +7,8 @@ namespace SteamCloudFileManager
     {
         IRemoteFile GetFile(string name);
         List<IRemoteFile> GetFiles();
-        bool GetQuota(out int totalBytes, out int availableBytes);
+        bool GetQuota(out ulong totalBytes, out ulong availableBytes);
+        bool WriteFile(string name, byte[] data);
         bool IsCloudEnabledForAccount { get; }
         bool IsCloudEnabledForApp { get; set; }
     }

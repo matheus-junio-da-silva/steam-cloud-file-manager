@@ -80,10 +80,16 @@ namespace SteamCloudFileManager
             return new RemoteFile(this, name.ToLowerInvariant());
         }
 
-        public bool GetQuota(out int totalBytes, out int availableBytes)
+        public bool GetQuota(out ulong totalBytes, out ulong availableBytes)
         {
             checkDisposed();
             return SteamRemoteStorage.GetQuota(out totalBytes, out availableBytes);
+        }
+
+        public bool WriteFile(string name, byte[] data)
+        {
+            checkDisposed();
+            return SteamRemoteStorage.FileWrite(name, data, data.Length);
         }
 
         void checkDisposed()

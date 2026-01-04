@@ -37,6 +37,7 @@ namespace SteamCloudFileManager
                 storage = RemoteStorage.CreateInstance(uint.Parse(appIdTextBox.Text));
                 //storage = new RemoteStorageLocal("remote", uint.Parse(appIdTextBox.Text));
                 refreshButton.Enabled = true;
+                uploadButton.Enabled = true;
                 refreshButton_Click(this, EventArgs.Empty);
             }
             catch (Exception ex)
@@ -73,7 +74,7 @@ namespace SteamCloudFileManager
         void updateQuota()
         {
             if (storage == null) throw new InvalidOperationException("Not connected");
-            int totalBytes, availBytes;
+            ulong totalBytes, availBytes;
             storage.GetQuota(out totalBytes, out availBytes);
             quotaLabel.Text = string.Format("{0}/{1} bytes used", totalBytes - availBytes, totalBytes);
         }
@@ -150,9 +151,42 @@ namespace SteamCloudFileManager
             if (allSuccess) MessageBox.Show(this, "Files deleted.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void uploadButton_Click(object sender, EventArgs e)
+        {
+            if (storage == null)
+            {
+                MessageBox.Show(this, "Not connected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                try
+                {
+                    byte[] data = File.ReadAllBytes(openFileDialog1.FileName);
+                    string fileName = Path.GetFileName(openFileDialog1.FileName);
+                    bool result = storage.WriteFile(fileName, data);
+                    if (result)
+                    {
+                        MessageBox.Show(this, "File uploaded successfully.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        refreshButton_Click(this, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        MessageBox.Show(this, "Failed to upload file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "Error uploading file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void remoteListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             downloadButton.Enabled = deleteButton.Enabled = (storage != null && remoteListView.SelectedIndices.Count > 0);
+            uploadButton.Enabled = (storage != null);
         }
     }
 }

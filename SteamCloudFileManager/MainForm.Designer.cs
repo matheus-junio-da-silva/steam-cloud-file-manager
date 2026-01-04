@@ -42,7 +42,9 @@
             this.quotaLabel = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
             this.downloadButton = new System.Windows.Forms.Button();
+            this.uploadButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // remoteListView
@@ -147,6 +149,18 @@
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
+            // uploadButton
+            // 
+            this.uploadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.uploadButton.Enabled = false;
+            this.uploadButton.Location = new System.Drawing.Point(174, 232);
+            this.uploadButton.Name = "uploadButton";
+            this.uploadButton.Size = new System.Drawing.Size(75, 23);
+            this.uploadButton.TabIndex = 8;
+            this.uploadButton.Text = "Upload";
+            this.uploadButton.UseVisualStyleBackColor = true;
+            this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
+            // 
             // downloadButton
             // 
             this.downloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -164,12 +178,17 @@
             this.saveFileDialog1.Filter = "All files|*";
             this.saveFileDialog1.Title = "Save remote file as...";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "All files|*";
+            this.openFileDialog1.Title = "Select file to upload";
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 267);
             this.Controls.Add(this.downloadButton);
+            this.Controls.Add(this.uploadButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.remoteListView);
             this.Controls.Add(this.quotaLabel);
@@ -200,7 +219,9 @@
         private System.Windows.Forms.Label quotaLabel;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button downloadButton;
+        private System.Windows.Forms.Button uploadButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

@@ -39,12 +39,25 @@ namespace SteamCloudFileManager
             return files;
         }
 
-        public bool GetQuota(out int totalBytes, out int availableBytes)
+        public bool GetQuota(out ulong totalBytes, out ulong availableBytes)
         {
             DriveInfo di = new DriveInfo(Path.GetPathRoot(Path.GetFullPath(basePath)));
-            totalBytes = di.TotalSize > int.MaxValue ? int.MaxValue : (int)di.TotalSize;
-            availableBytes = di.AvailableFreeSpace > int.MaxValue ? int.MaxValue : (int)di.AvailableFreeSpace;
+            totalBytes = (ulong)di.TotalSize;
+            availableBytes = (ulong)di.AvailableFreeSpace;
             return true;
+        }
+
+        public bool WriteFile(string name, byte[] data)
+        {
+            try
+            {
+                File.WriteAllBytes(Path.Combine(basePath, appId.ToString(), name.ToLowerInvariant()), data);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool IsCloudEnabledForAccount
